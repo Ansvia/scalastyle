@@ -16,10 +16,10 @@
 
 package org.scalastyle
 
-import scala.xml.Elem
-import scala.collection.JavaConversions.collectionAsScalaIterable
-import com.typesafe.config.ConfigFactory
 import com.typesafe.config.Config
+
+import scala.collection.JavaConversions.collectionAsScalaIterable
+import scala.xml.Elem
 
 object Output {
   def findMessage(messageHelper: MessageHelper, key: String, args: List[String], customMessage: Option[String]): String = {
@@ -75,7 +75,7 @@ class TextOutput[T <: FileSpec](config: Config, verbose: Boolean = false, quiet:
     case StartFile(file) => if (verbose) println("start file " + file)
     case EndFile(file) => if (verbose) println("end file " + file)
     case StyleError(file, clazz, key, level, args, line, column, customMessage) => if (!quiet || verbose) {
-      println(messageHelper.text(level.name) + print("file", file.name) +
+      println(messageHelper.text(level.name) + print("file", file.name + ":" + line.getOrElse(0)) +
         print("message", Output.findMessage(messageHelper, key, args, customMessage)) +
         print("line", line) + print("column", column))
     }
