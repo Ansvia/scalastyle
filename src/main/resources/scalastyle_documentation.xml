@@ -74,6 +74,23 @@ is considered to be a magic number.
  </example-configuration>
  </check>
 
+ <check id="regex.line">
+ <justification>
+ Some checks can be carried out with a regular expression.
+     Unlike org.scalastyle.file.RegexChecker, this check performed line by line.
+ </justification>
+ <example-configuration>
+ <![CDATA[
+    <check level="warning" class="org.scalastyle.file.RegexLineChecker" enabled="true">
+      <parameters>
+        <parameter name="regex">^[/]+println.$</parameter>
+      </parameters>
+      <customMessage>No println please</customMessage>
+    </check>
+ ]]>
+ </example-configuration>
+ </check>
+
  <check id="number.of.types">
  <justification>
  If there are too many classes/objects defined in a single file, this can cause the code to be difficult to understand.
